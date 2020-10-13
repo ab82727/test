@@ -1,3 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.0.1/lib/anime.min.js"></script>
+    
+    <style type="text/css">
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: pink;
+        }
+
+        body {
+            background-color: white;
+            overflow: hidden;
+        }
+
+        .error404page {
+            width: 400px;
+            height: 800px;
+            position: absolute;
+            top: 50%;
+            left: 66%;
+            transform: scale(0.5,0.5) translate(-50%, -50%);
+            z-index: 1;
+        }
+
+        .body404,
+        .head404,
+        .eyes404,
+        .leftarm404,
+        .rightarm404,
+        .leftgate,
+        .rightgate,
+        .chair404,
+        .leftshoe404,
+        .rightshoe404,
+        .legs404,
+        .laptop404 {
+            background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/15979/404-character-new.png)
+            0 0 no-repeat;
+            width: 200px;
+            height: 200px;
+        }
+
+        .newcharacter404,
+        .torso404,
+        .body404,
+        .head404,
+        .eyes404,
+        .leftarm404,
+        .rightarm404,
+        .chair404,
+        .leftshoe404,
+        .rightshoe404,
+        .legs404,
+        .laptop404 {
+            background-size: 750px;
+            position: absolute;
+            display: block;
+        }
+
+        .newcharacter404 {
+            width: 400px;
+            height: 800px;
+            left: 50%;
+            top: 20px;
+            margin-left: -200px;
+        }
+
+        $swayspeed: 20s;
+
+        .torso404 {
+            position: absolute;
+            display: block;
+            top: 138px;
+            left: 0px;
+            width: 389px;
+            height: 252px;
+            animation: sway $swayspeed ease infinite;
+            transform-origin: 50% 100%;
+        }
+
+        .body404 {
+            position: absolute;
+            display: block;
+            top: 0px;
+            left: 0px;
+            width: 389px;
+            height: 253px;
+        }
+
+        .head404 {
+            position: absolute;
+            top: -148px;
+            left: 106px;
+            width: 160px;
+            height: 194px;
+            background-position: 0px -265px;
+            transform-origin: 50% 85%;
+            animation: headTilt $swayspeed ease infinite;
+        }
+
+        .eyes404 {
+            position: absolute;
+            top: 92px;
+            left: 34px;
+            width: 73px;
+            height: 18px;
+            background-position: -162px -350px;
+            animation: blink404 10s steps(1) infinite, pan 10s ease-in-out infinite;
+        }
+
+        .leftarm404 {
+            position: absolute;
+            top: 159px;
+            left: 0;
+            width: 165px;
+            height: 73px;
+            background-position: -265px -341px;
+            transform-origin: 9% 35%;
+            transform: rotateZ(0deg);
+            animation: typeLeft 0.4s linear infinite;
+        }
+
+        .rightarm404 {
+            position: absolute;
+            top: 148px;
+            left: 231px;
+            width: 157px;
+            height: 91px;
+            background-position: -442px -323px;
+            transform-origin: 90% 25%;
+            animation: typeLeft 0.4s linear infinite;
+        }
+
+        .chair404 {
+            position: absolute;
+            top: 430px;
+            left: 55px;
+            width: 260px;
+            height: 365px;
+            background-position: -12px -697px;
+        }
+
+        .legs404 {
+            position: absolute;
+            top: 378px;
+            left: 4px;
+            width: 370px;
+            height: 247px;
+            background-position: -381px -443px;
+        }
+
+        .leftshoe404 {
+            position: absolute;
+            top: 591px;
+            left: 54px;
+            width: 130px;
+            height: 92px;
+            background-position: -315px -749px;
+        }
+
+        .rightshoe404 {
+            position: absolute;
+            top: 594px;
+            left: 187px;
+            width: 135px;
+            height: 81px;
+            background-position: -453px -749px;
+            transform-origin: 35% 12%;
+            animation: tapRight 1s linear infinite;
+        }
+
+        .laptop404 {
+            position: absolute;
+            top: 186px;
+            left: 9px;
+            width: 365px;
+            height: 216px;
+            background-position: -2px -466px;
+            transform-origin: 50% 100%;
+            animation: tapWobble 0.4s linear infinite;
+        }
+
+
+
+        .gate {
+            width: 400px;
+            height: 800px;
+            position: absolute;
+            top: 40%;
+            left: 55%;
+            transform: scale(0.5,0.5) translate(-50%, -50%);    
+            z-index: 2;        
+        }
+        .leftgate {
+            position: absolute;
+            top: 159px;
+            left: -750px;
+            width: 185px;
+            height: 123px;
+            background-position: -265px -341px;
+            transform-origin: 9% 35%;
+            transform: scale(10,5.5) rotateZ(90deg);     
+            animation: slide 2s ;
+        }
+
+
+        .character404Msg {
+            width: 250px;
+            height: 445px;
+            position: absolute;
+            top: 45%;
+            left: 45%;            
+            z-index: 1;
+            background-color: white;
+        }
+
+        @keyframes slide {
+            0% {
+                transform: scale(10,5.5) rotateZ(90deg) translateY(-100px);
+            }
+            49% {
+                transform: scale(10,5.5) rotateZ(90deg) translateY(-70px);
+            }
+            50% {
+                transform: scale(10,5.5) rotateZ(90deg) translateY(-40px);
+            }
+            99% {
+                transform: scale(10,5.5) rotateZ(90deg) translateY(-10px);
+            }
+            100% {
+                transform: scale(10,5.5) rotateZ(90deg) translateY(0px);
+            }
+        }
+
+
+
+        @keyframes sway {
+            0% {
+                transform: rotateZ(0deg);
+            }
+            20% {
+                transform: rotateZ(0deg);
+            }
+            25% {
+                transform: rotateZ(4deg);
+            }
+            45% {
+                transform: rotateZ(4deg);
+            }
+            50% {
+                transform: rotateZ(0deg);
+            }
+            70% {
+                transform: rotateZ(0deg);
+            }
+            75% {
+                transform: rotateZ(-4deg);
+            }
+            90% {
+                transform: rotateZ(-4deg);
+            }
+            100% {
+                transform: rotateZ(0deg);
+            }
+        }
+
+        @keyframes headTilt {
+            0% {
+                transform: rotateZ(0deg);
+            }
+            20% {
+                transform: rotateZ(0deg);
+            }
+            25% {
+                transform: rotateZ(-4deg);
+            }
+            35% {
+                transform: rotateZ(-4deg);
+            }
+            38% {
+                transform: rotateZ(2deg);
+            }
+            42% {
+                transform: rotateZ(2deg);
+            }
+            45% {
+                transform: rotateZ(-4deg);
+            }
+            50% {
+                transform: rotateZ(0deg);
+            }
+            70% {
+                transform: rotateZ(0deg);
+            }
+            82% {
+                transform: rotateZ(0deg);
+            }
+            85% {
+                transform: rotateZ(4deg);
+            }
+            90% {
+                transform: rotateZ(4deg);
+            }
+            100% {
+                transform: rotateZ(0deg);
+            }
+        }
+
+        @keyframes typeLeft {
+            0% {
+                transform: rotateZ(0deg);
+            }
+            25% {
+                transform: rotateZ(7deg);
+            }
+            75% {
+                transform: rotateZ(-6deg);
+            }
+            100% {
+                transform: rotateZ(0deg);
+            }
+        }
+
+        @keyframes typeRight {
+            0% {
+                transform: rotateZ(0deg);
+            }
+            25% {
+                transform: rotateZ(-6deg);
+            }
+            75% {
+                transform: rotateZ(7deg);
+            }
+            100% {
+                transform: rotateZ(0deg);
+            }
+        }
+
+        @keyframes tapWobble {
+            0% {
+                transform: rotateZ(-0.2deg);
+            }
+            50% {
+                transform: rotateZ(0.2deg);
+            }
+            100% {
+                transform: rotateZ(-0.2deg);
+            }
+        }
+
+        @keyframes tapRight {
+            0% {
+                transform: rotateZ(0deg);
+            }
+            90% {
+                transform: rotateZ(-6deg);
+            }
+            100% {
+                transform: rotateZ(0deg);
+            }
+        }
+
+        @keyframes blink404 {
+            0% {
+                background-position: -162px -350px;
+            }
+            94% {
+                background-position: -162px -350px;
+            }
+            98% {
+                background-position: -162px -368px;
+            }
+            100% {
+                background-position: -162px -350px;
+            }
+        }
+
+        @keyframes pan {
+            0% {
+                transform: translateX(-2px);
+            }
+            49% {
+                transform: translateX(-2px);
+            }
+            50% {
+                transform: translateX(2px);
+            }
+            99% {
+                transform: translateX(2px);
+            }
+            100% {
+                transform: translateX(-2px);
+            }
+        }
+
+        input{border:0;
+          background-color:#003C9D;
+          color:#fff;
+          border-radius:10px;
+          cursor:pointer;}
+
+          input:hover{
+              color:#003C9D;
+              background-color:#fff;
+              border:2px #003C9D solid;
+          }
+
+      </style>
+
+  </head>
+  <body>    
+
+     <div class="container">
+
+        <div class="gate">
+            <div class="leftgate"></div>        
+        </div>
+
+        <div class="error404page">       
+            <div class="newcharacter404">
+                <div class="chair404"></div>
+                <div class="leftshoe404"></div>
+                <div class="rightshoe404"></div>
+                <div class="legs404"></div>
+                <div class="torso404">
+                    <div class="body404"></div>
+                    <div class="leftarm404"></div>
+                    <div class="rightarm404"></div>
+                    <div class="head404">
+                        <div class="eyes404"></div>
+                    </div>
+                </div>
+                <div class="laptop404"></div>
+            </div>
+        </div>
+
+        <div class="character404Msg">       
+            <p>歡迎光臨本店，請自由參觀!</p>
+            <input type="button" value="進入商店" name="按鈕名稱" style="width:150px;height:50px;" onclick="location.href='https://www.google.com/'">
+        </div>
+    </div>
+</body>
+</html>
+--------------------------------------------------------------------------------------------
 <html>
 <head>
     <meta charset="UTF-8">
@@ -10,7 +462,7 @@
     <link href="main.css" rel=stylesheet>    
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script>
-       function showModal(obj) {
+     function showModal(obj) {
         if(obj.id.indexOf("my-btn1") >= 0) {       
             document.getElementById("testid1").style.display = "block";                        
         }
@@ -31,13 +483,24 @@
         }
         else if (obj.id.indexOf("my-imgbtn1-4") >= 0) {
             document.getElementById("my-imgbtn1-Pic").src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/42764/heart-smil.svg"  
+        }else if(obj.id.indexOf("my-imgbtn2-1") >= 0) {                   
+            document.getElementById("my-imgbtn2-Pic").src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/80625/lime.svg"  
+        }
+        else if (obj.id.indexOf("my-imgbtn2-2") >= 0) {
+            document.getElementById("my-imgbtn2-Pic").src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/80625/headerpic.svg"  
+        }
+        else if (obj.id.indexOf("my-imgbtn2-3") >= 0) {
+            document.getElementById("my-imgbtn2-Pic").src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/80625/lemon.svg"  
+        }
+        else if (obj.id.indexOf("my-imgbtn2-4") >= 0) {
+            document.getElementById("my-imgbtn2-Pic").src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/42764/heart-smil.svg"  
         }
     };
 
 
 
     function closeModal(obj) {
-     if(obj.id.indexOf("my-btn1") >= 0) {
+       if(obj.id.indexOf("my-btn1") >= 0) {
         document.getElementById("testid1").style.display = "none";
     }
     else if (obj.id.indexOf("my-btn2") >= 0) {
@@ -46,7 +509,7 @@
 }
 
 </script>
-<style type="text/css">
+<style type="text/css">    
     /*        適用於電腦螢幕*/
     @media screen{
         body{
@@ -69,7 +532,7 @@
         }
         aside{
             width:50%;
-            height: 500px;
+            height: 415px;
             background-color: white;
             float: left;
         }  
@@ -79,7 +542,7 @@
         }
         article{
             width:50%;
-            height: 500px;
+            height: 415px;
             background-color: white;
             float: left;
             font-size:13px;
@@ -149,6 +612,9 @@
         .modal-body-right img{
             float: left;
             border:5px #FFAC55 solid;
+        }
+        .modal-content{
+            height: 90vh;
         }
 
     }       
@@ -238,11 +704,24 @@
         .modal-dialog{
             height: auto;
         }
+        .modal-content{
+            height: 90vh;
+        }
+        .modal-body-left{
+            width: 60%;
+            float: left;
+            height: 100%;
+        }
+        .modal-body-right{
+            width: 40%;
+            float: left;
+            height: 100%;
+        }
 
     }
     /*        適用於平版直著拿的情況（平版橫著拿的情況就和電腦螢幕相同）*/
     @media screen and (min-width:481px) and (max-width:768px){
-     div{
+       div{
         width:100%;
         height:auto;
         margin:auto;
@@ -322,6 +801,19 @@
     .modal-dialog{
         height: auto;
     }
+    .modal-content{
+        height: 90vh;
+    }
+    .modal-body-left{
+            width: 70%;
+            float: left;
+            height: 100%;
+        }
+        .modal-body-right{
+            width: 30%;
+            float: left;
+            height: 100%;
+        }
 
 }
 
@@ -341,20 +833,20 @@ ul.pic li {
 }
 
 ul.pic li.on {
- width: 100%;
- left: 0;
- height: 75%;
+   width: 100%;
+   left: 0;
+   height: 75%;
 }
 
 ul.pic li {
- width: 100%;   
- height: 75%;
+   width: 100%;   
+   height: 75%;
 }
 
 
 .productImg{
- width: 25%;
- height: 95%;   
+   width: 25%;
+   height: 95%;   
 }
 
 ul.mark li {
@@ -425,6 +917,167 @@ div.next:after {
     right: 25px;
     top: 25px;
     transform: scale(0.25,0.25);
+}
+
+.shake.shake-little {
+  animation-name: shake-little;
+  animation-duration: 100ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  animation-delay: 4s;
+}
+
+@keyframes shake-little {
+  0% {
+    transform: translate(0px, 0px) rotate(0deg);
+  }
+  2% {
+    transform: translate(0px, 0px) rotate(0.5deg);
+  }
+  4% {
+    transform: translate(1px, 0px) rotate(0.5deg);
+  }
+  6% {
+    transform: translate(1px, 1px) rotate(0.5deg);
+  }
+  8% {
+    transform: translate(1px, 0px) rotate(0.5deg);
+  }
+  10% {
+    transform: translate(0px, 0px) rotate(0.5deg);
+  }
+  12% {
+    transform: translate(0px, 0px) rotate(0.5deg);
+  }
+  14% {
+    transform: translate(0px, 0px) rotate(0.5deg);
+  }
+  16% {
+    transform: translate(1px, 0px) rotate(0.5deg);
+  }
+  18% {
+    transform: translate(0px, 1px) rotate(0.5deg);
+  }
+  20% {
+    transform: translate(1px, 0px) rotate(0.5deg);
+  }
+  22% {
+    transform: translate(1px, 1px) rotate(0.5deg);
+  }
+  24% {
+    transform: translate(0px, 1px) rotate(0.5deg);
+  }
+  26% {
+    transform: translate(0px, 0px) rotate(0.5deg);
+  }
+  28% {
+    transform: translate(1px, 1px) rotate(0.5deg);
+  }
+  30% {
+    transform: translate(0px, 1px) rotate(0.5deg);
+  }
+  32% {
+    transform: translate(0px, 1px) rotate(0.5deg);
+  }
+  34% {
+    transform: translate(0px, 0px) rotate(0.5deg);
+  }
+  36% {
+    transform: translate(0px, 1px) rotate(0.5deg);
+  }
+  38% {
+    transform: translate(0px, 1px) rotate(0.5deg);
+  }
+  40% {
+    transform: translate(1px, 1px) rotate(0.5deg);
+  }
+  42% {
+    transform: translate(0px, 0px) rotate(0.5deg);
+  }
+  44% {
+    transform: translate(1px, 1px) rotate(0.5deg);
+  }
+  46% {
+    transform: translate(0px, 0px) rotate(0.5deg);
+  }
+  48% {
+    transform: translate(1px, 1px) rotate(0.5deg);
+  }
+  50% {
+    transform: translate(0px, 0px) rotate(0.5deg);
+  }
+  52% {
+    transform: translate(1px, 1px) rotate(0.5deg);
+  }
+  54% {
+    transform: translate(0px, 0px) rotate(0.5deg);
+  }
+  56% {
+    transform: translate(1px, 1px) rotate(0.5deg);
+  }
+  58% {
+    transform: translate(1px, 0px) rotate(0.5deg);
+  }
+  60% {
+    transform: translate(0px, 1px) rotate(0.5deg);
+  }
+  62% {
+    transform: translate(1px, 0px) rotate(0.5deg);
+  }
+  64% {
+    transform: translate(0px, 0px) rotate(0.5deg);
+  }
+  66% {
+    transform: translate(1px, 0px) rotate(0.5deg);
+  }
+  68% {
+    transform: translate(1px, 1px) rotate(0.5deg);
+  }
+  70% {
+    transform: translate(1px, 1px) rotate(0.5deg);
+  }
+  72% {
+    transform: translate(0px, 1px) rotate(0.5deg);
+  }
+  74% {
+    transform: translate(0px, 0px) rotate(0.5deg);
+  }
+  76% {
+    transform: translate(0px, 0px) rotate(0.5deg);
+  }
+  78% {
+    transform: translate(1px, 1px) rotate(0.5deg);
+  }
+  80% {
+    transform: translate(1px, 0px) rotate(0.5deg);
+  }
+  82% {
+    transform: translate(0px, 0px) rotate(0.5deg);
+  }
+  84% {
+    transform: translate(0px, 0px) rotate(0.5deg);
+  }
+  86% {
+    transform: translate(0px, 1px) rotate(0.5deg);
+  }
+  88% {
+    transform: translate(1px, 0px) rotate(0.5deg);
+  }
+  90% {
+    transform: translate(0px, 0px) rotate(0.5deg);
+  }
+  92% {
+    transform: translate(1px, 0px) rotate(0.5deg);
+  }
+  94% {
+    transform: translate(0px, 0px) rotate(0.5deg);
+  }
+  96% {
+    transform: translate(1px, 1px) rotate(0.5deg);
+  }
+  98% {
+    transform: translate(1px, 0px) rotate(0.5deg);
+  }
 }
 
 </style>
@@ -506,17 +1159,18 @@ div.next:after {
             </div>            
         </aside>   
         <article>           
-            <h2>連絡我們</h2>
-
+            <h3>連絡我們</h3>
+            <span>若有問題，請加入店鋪line@方便聯繫</span><br>
+            <span class="shake shake-little">Shake</span>
         </article>          
 
     </div>
 
     <div class="modal" role="dialog" id="testid1" style="display: none">
-       <div class="modal-dialog" role="document"> 
+     <div class="modal-dialog" role="document"> 
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" style="float: left;">1使用</h5>          
+                <h5 class="modal-title" style="float: left;">11使用</h5>          
                 <button type="button" class="btn btn-secondary" onclick="closeModal(this)" id="my-btn1-close" style="float: right;">Close</button>       
             </div>
             <div class="modal-body">
@@ -544,17 +1198,31 @@ div.next:after {
 
 
 <div class="modal" role="dialog" id="testid2" style="display: none">
-   <div class="modal-dialog" role="document"> 
+ <div class="modal-dialog" role="document"> 
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title">22222222</h5>                
+            <h5 class="modal-title" style="float: left;">22使用</h5>          
+            <button type="button" class="btn btn-secondary" onclick="closeModal(this)" id="my-btn2-close" style="float: right;">Close</button>       
         </div>
         <div class="modal-body">
-            <p>我們要呈現在Modal22222裡的內容</p> 
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" onclick="closeModal(this)" id="my-btn2-close">Close</button>                
-        </div>
+            <div class="modal-body-left">
+                <img id="my-imgbtn2-Pic" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/80625/lime.svg" width="100px" height="100px">
+            </div> 
+            <div class="modal-body-right">                    
+                <button type="button" onclick="showPic(this)" id="my-imgbtn2-1" style="width: 45%;height: 100px;padding: 1px">
+                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/80625/lime.svg"  width="100%" height="100%" >
+                </button>
+                <button type="button" onclick="showPic(this)" id="my-imgbtn2-2" style="width: 45%;height: 100px;padding: 1px">
+                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/80625/headerpic.svg"  width="100%" height="100%" >
+                </button>
+                <button type="button" onclick="showPic(this)" id="my-imgbtn2-3" style="width: 45%;height: 100px;padding: 1px">
+                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/80625/lemon.svg"  width="100%" height="100%">                    
+                </button>
+                <button type="button" onclick="showPic(this)" id="my-imgbtn2-4" style="width: 45%;height: 100px;padding: 1px">
+                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/42764/heart-smil.svg"  width="100%" height="100%">
+                </button>
+            </div> 
+        </div>            
     </div>
 </div>
 </div>
@@ -607,17 +1275,17 @@ div.next:after {
 
     })
     function autoplay() {
-       t=setInterval(function () {
-           index++;
-           index>pic.length-1 && (index=0)
-           play(index)
+     t=setInterval(function () {
+         index++;
+         index>pic.length-1 && (index=0)
+         play(index)
 
-       },3000)
-   }
-   autoplay();
+     },3000)
+ }
+ autoplay();
 
 
-   function play (a) {
+ function play (a) {
 
     index=a
         pic.eq(a).css("left","100%").stop(true,true).animate({left:"0"},1000)  //使用的百分比，在css裏要給出固定的父元素寬度，不然縮小頁面會出現錯誤
